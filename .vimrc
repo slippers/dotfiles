@@ -16,7 +16,11 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-flake8'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'tmhedberg/SimpylFold'
+
+" http://valloric.github.io/YouCompleteMe/#ubuntu-linux-x64
+" must compile this for the server to work
 Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'scrooloose/syntastic'
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
@@ -106,6 +110,9 @@ set splitright                  " Vertical splits open to the right of the curre
 
 set wildmode=longest,list       " Pressing <Tab> shows command suggestions similar to pressing <Tab>
 
+set encoding=utf-8
+
+syntax on
 
 au BufNewFile,BufRead *.py:
     \ set tabstop=4
@@ -124,11 +131,17 @@ au BufNewFile,BufRead *.js, *.html, *.css:
 " Enable folding with the spacebar
 nnoremap <space> za
 
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+
 "define BadWhitespace before using in a match
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
-set encoding=utf-8
 
 " YouCompleteMe autoclose
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -146,16 +159,15 @@ EOF
 
 
 let python_highlight_all=1
-syntax on
 
 if has('gui_running')
     set background=dark
     colorscheme solarized
-"else
-"    colorscheme zenburn
+else
+    colorscheme zenburn
 endif
 
-"call togglebg#map("<F5>")
+call togglebg#map("<F5>")
 
 
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
